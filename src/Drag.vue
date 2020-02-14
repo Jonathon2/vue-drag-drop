@@ -91,11 +91,14 @@
 				// At last, emit the event.
 				this.$emit(name, this.transferData, nativeEvent);
 
+				// For some reason on IOS 13.3 the dragend gets called before the drag actually ends
+				// There is probably a better solution then too just comment out the data clearing
+				// But since I only care about the data being replaced this works for me.
 				// Clean up stored data on drag end after emitting.
-				if (name === events.dragend) {
-					transferDataStore.data = undefined;
-					this.dragging = false;
-				}
+				// if (name === events.dragend) {
+				// 	transferDataStore.data = undefined;
+				// 	this.dragging = false;
+				// }
 			},
 		},
 	};
